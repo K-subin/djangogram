@@ -1,14 +1,8 @@
 from django.urls import path
+from . import views
 
-from djangogram.users.views import (
-    user_detail_view,
-    user_redirect_view,
-    user_update_view,
-)
-
+# users 앱에서는 view함수 내부에 main함수와 연결 --> main함수 만들고 템플릿 만들자
 app_name = "users"
 urlpatterns = [
-    path("~redirect/", view=user_redirect_view, name="redirect"),
-    path("~update/", view=user_update_view, name="update"),
-    path("<str:username>/", view=user_detail_view, name="detail"),
+    path('', views.main, name='main'),
 ]

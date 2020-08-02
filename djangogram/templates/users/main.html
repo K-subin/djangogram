@@ -1,0 +1,11 @@
+Here is main.html
+
+<!-- user name과 password를 'users:main' url로 post방식으로 호출
+    post를 요청할 때 반드시 csrf 호출
+-->
+<form action="{% url 'users:main' %}" method='post'>
+    {% csrf_token %}
+    <input type='input' name='username' placeholder="username">
+    <input type='password' name='password' placeholder="password">
+    <input type='submit' value='Login'>
+</form>

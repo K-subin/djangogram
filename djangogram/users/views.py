@@ -1,50 +1,26 @@
-from django.contrib import messages
-from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
-from django.views.generic import DetailView, RedirectView, UpdateView
-
-User = get_user_model()
+from django.shortcuts import render
+from django.contrib.auth import authenticate, login
 
 
-class UserDetailView(LoginRequiredMixin, DetailView):
+def main(request):
+    # GET과 POST 분기 처리
 
-    model = User
-    slug_field = "username"
-    slug_url_kwarg = "username"
+    # 페이지를 보기 위한 GET방식
+    if request.method == 'GET':
+        return render(request, 'users/main.html')
+    # 로그인을 위한 POST방식
+    elif request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
 
-
-user_detail_view = UserDetailView.as_view()
-
-
-class UserUpdateView(LoginRequiredMixin, UpdateView):
-
-    model = User
-    fields = ["name"]
-
-    def get_success_url(self):
-        return reverse("users:detail", kwargs={"username": self.request.user.username})
-
-    def get_object(self):
-        return User.objects.get(username=self.request.user.username)
-
-    def form_valid(self, form):
-        messages.add_message(
-            self.request, messages.INFO, _("Infos successfully updated")
-        )
-        return super().form_valid(form)
-
-
-user_update_view = UserUpdateView.as_view()
-
-
-class UserRedirectView(LoginRequiredMixin, RedirectView):
-
-    permanent = False
-
-    def get_redirect_url(self):
-        return reverse("users:detail", kwargs={"username": self.request.user.username})
-
-
-user_redirect_view = UserRedirectView.as_view()
+        # 로그인 성공하면 posts 페이지로 이동
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse('posts:index'))
+        # 로그인 실패하면 메인페이지로 이동
+        else:
+            return render(request, 'users/main.html')
+    
