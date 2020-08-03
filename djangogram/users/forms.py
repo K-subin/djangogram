@@ -36,16 +36,19 @@ class SignUpForm(django_forms.ModelForm):
         fields = ['email', 'name', 'username', 'password']
 
         # 레이블 이름 바꿔주기
-        labels = {
-            'email' : '이메일 주소',
-            'name' : '성명',
-            'username' : '사용자 이름',
-            'password' : '비밀번호',
-        }
+        #labels = {
+        #    'email' : '이메일 주소',
+        #    'name' : '성명',
+        #    'username' : '사용자 이름',
+        #    'password' : '비밀번호',
+        #}
 
         # 패스워드가 보여지지 않게 하기 위해
         widgets = {
-            'password' : django_forms.PasswordInput(),
+            'email' : django_forms.TextInput(attrs={'placeholder' : '이메일 주소'}),
+            'name' : django_forms.TextInput(attrs={'placeholder' : '성명'}),
+            'username' : django_forms.TextInput(attrs={'placeholder' : '사용자 이름'}),
+            'password' : django_forms.PasswordInput(attrs={'placeholder':'비밀번호'}),
         }
 
     # 유효한 패스워드 저장하기 위해 오버라이딩
