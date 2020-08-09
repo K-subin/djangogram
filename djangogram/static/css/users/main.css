@@ -22,10 +22,16 @@ title {
 .auth {
     background-color: white;
     width: 350px;
-    height: 300px;
+    height: 500px;
     border: 1px solid #efefef;
     display: flex;
     flex-direction: column;
+}
+
+.auth img {
+    display: flex;
+    width: 50px; 
+    height: 43px;
 }
 
 .auth form {

@@ -1,4 +1,5 @@
 {% extends "users/base.html" %}
+{% load static %}
 
 <h1>Here is main.html</h1>
 {% block title %}
@@ -9,7 +10,9 @@ Log in
 <!-- user name과 password를 'users:main' url로 post방식으로 호출
     post를 요청할 때 반드시 csrf 호출
 -->
+
 <div class="auth">
+    <img src="{% static 'images/posts/main_logo.png' %}" alt="logo">
     <form action="{% url 'users:main' %}" method='post'>
         {% csrf_token %}
         <input type='input' name='username' placeholder="username">
@@ -19,7 +22,7 @@ Log in
 </div>
 
 <div class="auth_link">
-    <a href="{% url 'users:signup' %}">Sign up</a>
+    <a href="{% url 'users:signup' %}">가입하기</a>
 </div>
 
 {% endblock content %}
