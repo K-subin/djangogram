@@ -4,16 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/posts/navbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/posts/footer.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/posts/base.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/posts/header.css' %}">
-    
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
+    <script src="{% static 'js/posts/main.js' %}" defer></script>
+
     <title>Document</title>
 </head>
+
 <body>
-    <div class="header">
-        {% include "posts/header.html" %}
+    <header>
+        {% include "posts/navbar.html" %}
+    </header>
+
+    <div class="post">
+        {% block post %} {% endblock %} 
     </div>
+    
+    <footer>
+        {% include "posts/footer.html" %}
+    </footer>
 </body>
 </html>

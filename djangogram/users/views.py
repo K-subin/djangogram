@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from .forms import SignUpForm
+from . import models
 
 def main(request):
     # GET과 POST 분기 처리
@@ -50,3 +51,12 @@ def signup(request):
                 return HttpResponseRedirect(reverse('posts:index'))
         # 회원가입 실패하면 메인페이지로 이동            
         return render(request, 'users/main.html')
+
+def UserProfile(request):
+    def post(self, request, user_id, format=None):
+        user = request.user
+        try:
+            user_to_follow = models.User.objects.get(id=user_id)
+        except models.User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        user.following.remove(user_to_follow)

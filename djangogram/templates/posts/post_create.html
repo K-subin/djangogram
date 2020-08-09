@@ -1,0 +1,22 @@
+{% extends 'posts/base.html' %}
+this is post create html.
+
+{% block post %}
+<div class="row">
+    <div class="col"></div>
+    <div class="col-12 col-xl-8 col-md-8">
+        <div class="alert alert-primary" role="alert">
+            모든 부분을 다 채워넣어주세요!
+        </div>
+
+        <!-- enctype 추가하여 데이터형식을 입력한다고 알려줌 -->
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.as_p }} <!-- 한줄씩 띄우면서 create의 field에 등록된 것 가져옴-->
+            <input type="submit" value="Upload" class="btn btn-primary">
+        </form>
+    </div>
+    <div class="col"></div>
+</div>
+{% endblock %}

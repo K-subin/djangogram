@@ -1,0 +1,18 @@
+.night {
+    display: none;
+    position: absolute;
+    right: 22px;
+    bottom: 22px;
+}
+.day {
+    display: none;
+    position: absolute;
+    right: 22px;
+    bottom: 22px;
+}
+.night.active {
+    display: flex;
+}
+.day.active {
+    display: flex;
+}

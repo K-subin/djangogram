@@ -1,0 +1,15 @@
+{% extends 'posts/base.html' %}
+this is post update html.
+
+{% block post %}
+<div class="row">
+    <div class="col"></div>
+    <div class="col-12 col-x1-8 col-md-8">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Create">
+        </form>
+    </div>
+    <div class="col"></div>
+</div>
