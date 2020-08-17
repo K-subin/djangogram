@@ -1,14 +1,3 @@
-/*
-const toggleBtn = document.querySelector('.navbar-toggleBtn');
-const search = document.querySelector('.search')
-const icons = document.querySelector('.navbar-icons')
-
-toggleBtn.addEventListener('click', () => {
-    search.classList.toggle('active');
-    icons.classList.toggle('active');
-});
-*/
-
 var Body = {
     setBackgroundColor:function(color){
         document.querySelector('body').style.backgroundColor=color;
@@ -32,5 +21,4 @@ const night = document.querySelector('.night');
 day.classList.toggle('active');
 nightDayHandler(day, '#263343', 'white');
 nightDayHandler(night, 'white', '#263343');
-
 

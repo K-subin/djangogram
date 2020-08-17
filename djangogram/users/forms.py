@@ -35,14 +35,6 @@ class SignUpForm(django_forms.ModelForm):
         model = User
         fields = ['email', 'name', 'username', 'password']
 
-        # 레이블 이름 바꿔주기
-        #labels = {
-        #    'email' : '이메일 주소',
-        #    'name' : '성명',
-        #    'username' : '사용자 이름',
-        #    'password' : '비밀번호',
-        #}
-
         # 패스워드가 보여지지 않게 하기 위해
         widgets = {
             'email' : django_forms.TextInput(attrs={'placeholder' : '이메일 주소'}),
@@ -58,3 +50,15 @@ class SignUpForm(django_forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class ProfileForm(django_forms.ModelForm):
+    username = django_forms.CharField(widget=django_forms.TextInput(attrs={'class': 'form-control ', 'placeholder': 'Username'}))
+    email = django_forms.EmailField(widget=django_forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'email'}))
+    phone_number = django_forms.CharField(widget=django_forms.TextInput(attrs={'class': 'form-control ', 'placeholder': 'Username'}))
+    
+    class Meta:
+        model = User
+        fields = ['profile_photo','username', 'email', 'phone_number', 'gender']
+    
+    #password = django_forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
+    #password_confirm = django_forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password_confirm'}))

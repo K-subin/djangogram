@@ -1,40 +1,46 @@
 {% extends 'posts/base.html' %}
 this is post list html.
 
+{% load static %}
 {% block post %}
 {% csrf_token %}
-<div class="container">
-    <div class="row">
-        <div class="col"></div>
-        <div class="col-5">
-            {% for object in object_list %}
 
-            <div class="card">
-                <div class="card-header">
-                    {{ object.author }}
-                </div>
-    
-                <img src="{{ object.image.url }}" class="card-img-top" alt="">
-    
-                <div class="card-body">
-                    <p class="card-text"> {{ object.text }} </p>
-                </div>
-    
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">생성일 : {{ object.created_at }}</li>
-                    <li class="list-group-item">생성일 : {{ object.updated_at }}</li>
-                </ul>
-    
-                <dlv class="card-body">
-                    <a href="{% url 'posts:detail' object.id %}" class="card-link">댓글달기</a>
-                    <a href="{% url 'posts:update' object.id %}" class="card-link">수정하기</a>
-                    <a href="{% url 'posts:delete' object.id %}" class="card-link">삭제하기</a>
-                </dlv>
+{% if object_list %}
+    {% for object in object_list %}
+    <div class="box">
+        <div class="caption">
+            <div class="name">                
+                <a class = "user_image" href="#">
+                    <img src="{% static 'images/users/default_profile.png' %}">
+                </a>
+                {{ object.author }}
             </div>
-            {% endfor %}
-        </div>
 
-        <div class="col"></div>
+            <div class="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">         
+                    <i class="fas fa-bars fa-2x"></i>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a class="dropdown-item" href="{% url 'posts:update' object.id %}">수정하기</a></li>
+                    <li><a class="dropdown-item" href="{% url 'posts:delete' object.id %}">삭제하기</a></li>
+                </ul>
+            </div>
+        </div>
+        <img src="{{ object.image.url }}" class="card-img" alt="" >
+
+        <div class="text"> 
+            {{ object.text }}
+        </div>
+        <ul class="time">
+            <li class="create">생성일 : {{ object.created_at }}</li>
+            <li class="update">수정일 : {{ object.updated_at }}</li>
+        </ul>
+
+        <a href="{% url 'posts:detail' object.id %}"class="comment">댓글달기</a>
+        
     </div>
-</div>
+    {% endfor %}       
+{% else %}
+포스트가 없습니다.
+{% endif %}
 {% endblock %}

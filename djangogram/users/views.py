@@ -1,9 +1,12 @@
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login
-from .forms import SignUpForm
+from .forms import SignUpForm, ProfileForm
 from . import models
+from django.contrib.auth.models import User
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
 def main(request):
     # GET과 POST 분기 처리
@@ -44,19 +47,80 @@ def signup(request):
             password = form.cleaned_data['password']
 
             user = authenticate(request, username=username, password=password)
-
+ 
             # 로그인 성공하면 posts 페이지로 이동
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(reverse('posts:index'))
+                return HttpResponseRedirect(reverse('users:profile'))
         # 회원가입 실패하면 메인페이지로 이동            
         return render(request, 'users/main.html')
 
-def UserProfile(request):
-    def post(self, request, user_id, format=None):
-        user = request.user
-        try:
-            user_to_follow = models.User.objects.get(id=user_id)
-        except models.User.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        user.following.remove(user_to_follow)
+
+class ProfileList(DetailView):
+    model = models.User
+    fields = ['profile_photo','username', 'email', 'phone_number', 'gender']
+    template_name = 'users/profile_list.html'
+    context_object_name = 'profile_user'
+    def get_object(self):
+        return models.User.objects.get(username=username)
+
+'''
+  
+def ProfileList(request, username):
+    if request.method == 'GET':
+        return render(request, 'users/profile_update.html')
+
+    elif request.method == 'POST': 
+        profile_user = get_object_or_404(User, username)
+        #user = models.User.objects.get(username=username)
+        
+        #username=request.user.username
+        
+        return render(request, 'users/profile_list.html')
+'''
+
+
+def ProfileUpdate(request, username):
+    if request.method == 'GET':
+        form = ProfileForm()
+          
+        return render(request, 'users/profile_update.html', {'form':form})
+    
+    elif request.method == 'POST':
+        context_object_name = 'profile_user' 
+        form = ProfileForm(request.POST) # POST와 form을 묶어줌
+        found_user = models.User.objects.get(username=username)
+
+        if found_user is None:
+            return render(request, 'users/main.html')
+        elif found_user != request.user.username:
+            return render(request, 'users/main.html')
+        else:
+            if form.is_valid():
+                form.save() # 저장
+
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password']
+                
+            return render(request, 'users/profile_update.html')
+
+
+'''    
+def ProfileUpdateView(request):
+    def get(self, request):
+        user = get_object_or_404(User, pk=request.user.pk)
+        user_form = UserForm(initial = {
+            'username' : user.username,
+        })
+
+        if hasattr(user, 'profile'):
+            profile = user.profile
+            profile_form = ProfileForm(initial={
+                'nickname':profile.nickname,
+                'profile_photo':profile.profile_photo,
+            })
+        else:
+            profile_form = ProfileForm()
+        
+        return render(request, 'user/profile_update.html', {"user_form":user_form, "profile_form":profile_form})
+'''

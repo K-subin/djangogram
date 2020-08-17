@@ -16,7 +16,7 @@ title {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+} 
 
 /* auth */
 .auth {
@@ -28,7 +28,7 @@ title {
     flex-direction: column;
     padding: 20px;
 }
-
+ 
 .auth img {
     display: flex;
     align-self: center;

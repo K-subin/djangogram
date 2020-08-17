@@ -1,0 +1,28 @@
+{% extends 'posts/base.html' %}
+
+{% block post %}
+{% load static %}
+
+
+{% csrf_token %}
+<form action=""  method="POST" enctype="multipart/form-data">
+    {% load widget_tweaks %}
+    <div class="profile_photo">
+        {% if profile_user.profile_photo %}
+        <img class="round" src="{{ profile_user.profile_photo.url }}" width="300" height="300"><br>
+        {% else %}
+        <img class="round" src="{% static 'images/users/default_profile.png' %}" width="300" height="300"><br>
+        {% endif %}
+    </div>
+
+
+    <div class="fieldwrapper">
+        <div class="form-group">
+            <h3> username : {{ profile_user.username }}</h3>
+        </div>  
+    </div>
+
+</form>
+
+    
+

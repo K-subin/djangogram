@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/posts/navbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/posts/footer.css' %}">
+    
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        {% include "posts/navbar.html" %}
+    </header>
+
+    <div class="post">
+        {% csrf_token %}
+        <form action=""  method="POST" enctype="multipart/form-data">
+            {% load widget_tweaks %}
+            <div class="profile_photo">
+                {% if object.profile_photo %}
+                <img class="round" src="{{ object.profile_photo.url }}" width="500" height="550"><br>
+                {% else %}
+                <img class="round" src="{% static 'images/posts/default_profile.png' %}" width="500" height="550"><br>
+                {% endif %}
+            </div>
+            
+            
+            <div class="fieldwrapper">
+                <div class="form-group">
+                    {{{ form.as_p }}}
+                </div>  
+            </div>
+           
+        </form>
+    </div>
+    
+    <footer>
+        {% include "posts/footer.html" %}
+    </footer>
+</body>
+</html>

@@ -1,0 +1,91 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+body {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding-left: 8px;
+    padding-right: 8px;
+    height: 63px;
+    padding-top: 0;
+    border-bottom: solid 1px #d2d2d2;
+}
+
+.navbar-img img {
+    width: 135px; 
+    height: 43px;
+}
+
+input {
+    border: solid 1px #d2d2d2;
+    text-align: center;
+    height: 24px;
+    width: 195px;
+}
+
+input[type="text"], textarea {
+    background-color: #fafafa;
+}
+
+.navbar-icons {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    color: black;
+    font-size: 28px;
+}
+
+.navbar-icons li {
+    padding: 8px 10px;
+}
+
+
+@media screen and (max-width:670px) {
+    .search {
+        display: none;
+    }
+}
+
+/*
+.navbar-toggleBtn {
+    display: none;
+    position: absolute;
+    right: 32px;
+}
+
+@media screen and (max-width:670px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: 100px;
+        
+    }
+    .search, .navbar-icons{
+        display: none;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .navbar-toggleBtn {
+        display: block;
+    }
+
+    .search.active, .navbar-icons.active {
+        display: flex;
+    }
+}*/
