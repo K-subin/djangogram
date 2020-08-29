@@ -40,6 +40,12 @@
         {% block post %} {% endblock %} 
     </div>
     
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert">{{message}}</div>
+        {% endfor %}
+    {% endif %}
+    
     <footer>
         {% include "posts/footer.html" %}
     </footer>

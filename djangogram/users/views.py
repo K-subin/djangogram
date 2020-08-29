@@ -64,6 +64,7 @@ class ProfileList(DetailView):
     def get_object(self):
         return models.User.objects.get(username=username)
 
+
 '''
   
 def ProfileList(request, username):

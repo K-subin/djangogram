@@ -17,19 +17,7 @@ this is post create html.
             <div id="image_container">
                 <img id="img"/>
             </div>-->
-
             {{ form.image }}
-
-            <div class="img_container" style="display: flex; align-items: center;">
-                {% if widget.value %}
-                    <img src="{{ widget.value.url }}" style="width: 100px; height: 100px;">
-                {% endif %}
-
-                <img id="preview_{{ widget.attrs.id }}" style="width: 100px; height: 100px; display: none;">
-
-                {% include "admin/widgets/clearable_file_input.html" %}
-            
-            </div>
             
             {{ form.text }}
         </div>

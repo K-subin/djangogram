@@ -4,9 +4,10 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView, FormView
 from django.views.generic.detail import DetailView
 from .models import Post
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from .forms import DocumentForm
-from django.core.files.storage import FileSystemStorage
+from django.views.generic.base import View
+from urllib.parse import urlparse
 
 # Create your views here.
 def index(request):
@@ -24,7 +25,7 @@ class PostList(ListView):
     template_name_suffix = '_list'
     template_name = 'posts/post_list.html'
 
-'''
+
 class PostCreate(CreateView):
     model = Post
     template_name = 'posts/post_create.html'
@@ -41,7 +42,7 @@ class PostCreate(CreateView):
         else:
             return self.render_to_response({'form':form})
 
-
+'''
 
 def PostCreate(request):
     if request.method == 'GET':
@@ -58,40 +59,74 @@ def PostCreate(request):
         return HttpResponseRedirect(reverse('posts:index'))
         #else:
         #    return self.render_to_response({'form':form})
-'''
 
-def PostCreate(request):
-    if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('posts:index'))
-    else:
-        form = DocumentForm()
-    return render(request, 'posts/post_create.html', {'form':form})
-'''
-
-def PostCreate(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        return render(request, 'posts/post_create.html', {'uploaded_file_url':uploaded_file_url})
-    return render(request, 'posts/post_create.html')
 '''
 
 class PostUpdate(UpdateView):
     model = Post
     fields = ['text', 'image',]
     template_name_suffix = '_update'
-    success_url = '/'
+    #success_url = '/'
+
+    def dispatch(self, request, *args, **kwargs):
+        object = self.get_object()
+        if object.author != request.user:
+            messages.warning(request, '수정할 권한이 없습니다.')
+            return HttpResponseRedirect('/')
+        else:
+            return super(PostUpdate, self).dispatch(request, *args, **kwargs)
 
 class PostDelete(DeleteView):
     model = Post
     template_name_suffix = '_delete'
     success_url = '/'
 
+    def dispatch(self, request, *args, **kwargs):
+        object = self.get_object()
+        if object.author != request.user:
+            messages.warning(request, '삭제할 권한이 없습니다.')
+            return HttpResponseRedirect('/')
+        else:
+            return super(PostDelete, self).dispatch(request, *args, **kwargs)
+
+
 class PostDetail(DetailView):
     model = Post
     template_name_suffix = '_detail'
+
+
+class PostLike(View):
+    def get(self, request, *args, **kwargs):
+        # 로그인이 확인되지 않으면 자료를 숨기기
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+        else:
+            if 'post_id' in kwargs:
+                post_id = kwargs['post_id']
+                post = Post.objects.get(pk=post_id)
+                user = request.user
+                # 이미 좋아요 했으면 지우기
+                if user in post.like.all():
+                    post.like.remove(user)
+                # 안했으면 더하기
+                else:
+                    post.like.add(user)
+            # referer_url을 통해 좋아요 누른 페이지 그대로 있도록
+            referer_url = request.META.get('HTTP_REFERER')
+            path = urlparse(referer_url).path
+            return HttpResponseRedirect(path)
+
+class PostFavorite(View):
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+        else:
+            if 'post_id' in kwargs:
+                post_id = kwargs['post_id']
+                post = Post.objects.get(pk=post_id)
+                user = request.user
+                if user in post.favorite.all():
+                    post.favorite.remove(user)
+                else:
+                    post.favorite.add(user)
+            return HttpResponseRedirect('/')

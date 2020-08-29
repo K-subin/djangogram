@@ -20,10 +20,12 @@ this is post list html.
                 <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">         
                     <i class="fas fa-bars fa-2x"></i>
                 </a>
+                {% if user == object.author %}
                 <ul class="dropdown-menu" role="menu">
                     <li><a class="dropdown-item" href="{% url 'posts:update' object.id %}">수정하기</a></li>
                     <li><a class="dropdown-item" href="{% url 'posts:delete' object.id %}">삭제하기</a></li>
                 </ul>
+                {% endif %}
             </div>
         </div>
         <img src="{{ object.image.url }}" class="card-img" alt="" >
@@ -31,9 +33,21 @@ this is post list html.
         <div class="text"> 
             {{ object.text }}
         </div>
+        
+        <div class="like_favorite">
+            <a href="{% url 'posts:like' object.id %}" class="btn-like {% if user in object.like.all %} active {% endif %}">
+                <i class="far fa-heart"></i>
+            </a>
+            {% if object.like.all.count %}
+            <span class="float-left">
+                {{object.like.all.count}}
+            </span>
+            {% endif %}
+            <a href="{% url 'posts:favorite' object.id %}" class="btn-favorite {% if user in object.favorite.all %} active {% endif %}">저장하기!</a>
+        </div>
+
         <ul class="time">
             <li class="create">생성일 : {{ object.created_at }}</li>
-            <li class="update">수정일 : {{ object.updated_at }}</li>
         </ul>
 
         <a href="{% url 'posts:detail' object.id %}"class="comment">댓글달기</a>

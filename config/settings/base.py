@@ -2,7 +2,6 @@
 Base settings to build other settings files upon.
 """
 from pathlib import Path
-
 import environ
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
@@ -59,13 +58,13 @@ DJANGO_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
-    "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
     "widget_tweaks",
+    "django.contrib.sites",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -73,7 +72,6 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount",
 ]
-
 LOCAL_APPS = [
     "djangogram.users.apps.UsersConfig",
     # Your stuff: custom apps go here
@@ -81,6 +79,7 @@ LOCAL_APPS = [
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------

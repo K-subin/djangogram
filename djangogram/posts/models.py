@@ -23,8 +23,9 @@ class Post(TimeStampedModel):
     image = models.ImageField(upload_to='timeline_photo/%Y/%m/%d')
     caption = models.TextField(blank=True) # 제목
     # 좋아요 -> 다대다
-    image_likes = models.ManyToManyField(user_model.User, related_name='post_image_likes')
-    
+    like = models.ManyToManyField(user_model.User, related_name='like_post', blank=True)
+    favorite = models.ManyToManyField(user_model.User, related_name='favorite_post', blank=True)
+
     def __str__(self):
         return "text : " + self.text
 

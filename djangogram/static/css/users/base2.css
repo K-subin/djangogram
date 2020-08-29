@@ -11,7 +11,7 @@ title {
 }
 
 .content {
-    margin-top: 100px;
+    margin-top: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,30 +22,40 @@ title {
 .auth {
     background-color: white;
     width: 310px;
-    height: 330px;
+    height: 310px;
     border: 1px solid #d2d2d2;
     display: flex;
     flex-direction: column;
     padding: 20px;
 }
- 
-.auth img {
+
+.auth_make {
+    background-color: white;
+    width: 310px;
+    height: 370px;
+    border: 1px solid #d2d2d2;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+img {
     display: flex;
     align-self: center;
     width: 200px; 
     height: 75px;
     margin-bottom: 35px;
-    margin-top: 35px;
+    margin-top: 15px;
 }
 
-.auth form {
+form {
     display: flex;
     flex-direction: column;
     align-self: center;
     
 }
 
-.auth form input:last-child{
+.last{
     margin-top: 15px;
     border-radius: 5px;
     height: 35px;
@@ -66,7 +76,6 @@ input {
 input[type="text"], textarea {
     background-color: #fafafa;
 }
-
 
 /* Sign up, Log in Link */
 .auth_link {
