@@ -27,3 +27,6 @@
 
 ### 포스트 리스트 화면
 ![포스트](https://user-images.githubusercontent.com/68969252/91852992-880f9f80-ec9c-11ea-9071-c924997f69f6.PNG)
+
+### 포스트 댓글 화면
+![댓글](https://user-images.githubusercontent.com/68969252/91995654-0ccced00-ed73-11ea-9893-5461d70026c1.PNG)
