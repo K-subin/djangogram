@@ -1,6 +1,6 @@
 
 const browseBtn = document.querySelector('.browse-btn');
-const realInput = document.querySelector('.real');
+const realInput = document.querySelector('.realInput');
 const realimage = document.querySelector('div#file');
 const Input = document.querySelector('form.image');
 

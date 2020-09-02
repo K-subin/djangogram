@@ -2,6 +2,7 @@
 this is post list html.
 
 {% load static %}
+
 {% block post %}
 {% csrf_token %}
 
@@ -28,29 +29,48 @@ this is post list html.
                 {% endif %}
             </div>
         </div>
-        <img src="{{ object.image.url }}" class="card-img" alt="" >
-
-        <div class="text"> 
-            {{ object.text }}
-        </div>
         
-        <div class="like_favorite">
-            <a href="{% url 'posts:like' object.id %}" class="btn-like {% if user in object.like.all %} active {% endif %}">
-                <i class="far fa-heart"></i>
-            </a>
+        <img src="{{ object.image.url }}" class="post_img" alt="" >
+
+        <div class="textbox">
+            <ul class="like-favorite">
+                {% if user in object.like.all %}
+                <li><a href="{% url 'posts:like' object.id %}" class="btn-like active">
+                    <i class="fas fa-heart"></i>
+                </a></li>
+                {% else %}
+                <li><a href="{% url 'posts:like' object.id %}" class="btn-like">
+                    <i class="far fa-heart"></i>
+                </a></li>
+                {% endif %}
+
+                {% if user in object.favorite.all %}
+                <li><a href="{% url 'posts:favorite' object.id %}" class="btn-favorite active">
+                    <i class="fas fa-bookmark"></i>
+                </a></li>
+                {% else %}
+                <li><a href="{% url 'posts:favorite' object.id %}" class="btn-favorite">
+                    <i class="far fa-bookmark"></i>
+                </a></li>
+                {% endif %}
+            </ul>
+
             {% if object.like.all.count %}
-            <span class="float-left">
-                {{object.like.all.count}}
-            </span>
-            {% endif %}
-            <a href="{% url 'posts:favorite' object.id %}" class="btn-favorite {% if user in object.favorite.all %} active {% endif %}">저장하기!</a>
+            <div class="likecount">
+                좋아요 {{object.like.all.count}} 개
+            </div>
+            {% endif %} 
+
+            <div class="text">
+                <strong>{{object.author}}</strong>  {{object.text}}
+            </div>
+
+            <ul class="time">
+                {{ object.created_at|date:'Y년 m월 d일' }}</li>
+            </ul>
         </div>
 
-        <ul class="time">
-            <li class="create">생성일 : {{ object.created_at }}</li>
-        </ul>
-
-        <a href="{% url 'posts:detail' object.id %}"class="comment">댓글달기</a>
+        <a href="{% url 'posts:detail' object.id %}" class="comment">댓글달기</a>
         
     </div>
     {% endfor %}       
@@ -58,3 +78,4 @@ this is post list html.
 포스트가 없습니다.
 {% endif %}
 {% endblock %}
+

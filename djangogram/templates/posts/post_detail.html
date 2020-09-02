@@ -29,14 +29,43 @@ this is post detail html.
     </div>
     <img src="{{ object.image.url }}" class="card-img" alt="" >
 
-    <div class="text"> 
-        {{ object.text }}
+    <div class="textbox">
+        <ul class="like-favorite">
+            {% if user in object.like.all %}
+            <li><a href="{% url 'posts:like' object.id %}" class="btn-like active">
+                <i class="fas fa-heart"></i>
+            </a></li>
+            {% else %}
+            <li><a href="{% url 'posts:like' object.id %}" class="btn-like">
+                <i class="far fa-heart"></i>
+            </a></li>
+            {% endif %}
+
+            {% if user in object.favorite.all %}
+            <li><a href="{% url 'posts:favorite' object.id %}" class="btn-favorite active">
+                <i class="fas fa-bookmark"></i>
+            </a></li>
+            {% else %}
+            <li><a href="{% url 'posts:favorite' object.id %}" class="btn-favorite">
+                <i class="far fa-bookmark"></i>
+            </a></li>
+            {% endif %}
+        </ul>
+
+        {% if object.like.all.count %}
+        <div class="likecount">
+            좋아요 {{object.like.all.count}} 개
+        </div>
+        {% endif %} 
+
+        <div class="text">
+            <strong>{{object.author}}</strong>  {{object.text}}
+        </div>
+
+        <ul class="time">
+            {{ object.created_at|date:'Y년 m월 d일' }}</li>
+        </ul>
     </div>
-    
-    <ul class="time">
-        <li class="create">생성일 : {{ object.created_at }}</li>
-        <li class="update">수정일 : {{ object.updated_at }}</li>
-    </ul>
     
     <div id="disqus_thread"></div>
     <script>

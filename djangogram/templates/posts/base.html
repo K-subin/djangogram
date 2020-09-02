@@ -21,13 +21,15 @@
     
     <!-- javascrpit -->
     <script src="{% static 'js/posts/footer.js' %}" defer></script>
-    <script src="{% static 'js/posts/image.js' %}" defer></script>
+    <script src="{% static 'js/posts/image2.js' %}" defer></script>
     <script src="{% static 'js/posts/toggle.js' %}" defer></script>
-     
+    <script src="{% static 'js/posts/like-favorite.js' %}" defer></script>
+    
     <!-- css -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/posts/navbar2.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/posts/footer2.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/posts/base2.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/posts/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/posts/create2.css' %}">
     <title>Document</title>
 </head>
 
@@ -45,7 +47,7 @@
         <div class="alert">{{message}}</div>
         {% endfor %}
     {% endif %}
-    
+
     <footer>
         {% include "posts/footer.html" %}
     </footer>

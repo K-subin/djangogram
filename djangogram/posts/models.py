@@ -1,6 +1,7 @@
 from django.db import models
 from djangogram.users import models as user_model
 from django.urls import reverse
+from imagekit.models import ImageSpecField
 
 # auto_now_add=True --> 데이터가 생성되어 처음 저장될 대 시간 기록
 # auto_now=True --> 데이터가 수정될 때마다 시간 업데이트

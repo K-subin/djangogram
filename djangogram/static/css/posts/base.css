@@ -42,27 +42,14 @@ body {
     border-radius: 100%;
 }
 
-.text {
-    background-color: white;
+.post_img {
     width: 500px;
-    border: 1px solid #d2d2d2;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    align-self: center;
-    margin: auto;
 }
 
-.time {
+.textbox {
     background-color: white;
     width: 500px;
     border: 1px solid #d2d2d2;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    align-self: center;
-    margin: auto;
-    list-style: none;
 }
 
 .comment {
@@ -71,17 +58,64 @@ body {
     border: 1px solid #d2d2d2;
     display: flex;
     flex-direction: column;
+    padding: 15px;   
+    color: lightslategray; 
+}
+
+.like-favorite {
+    list-style: none;
+    justify-content: space-between;
+    display: flex;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 0px;
+    color: black;
+    font-size: 35px;
+    margin: auto; 
+}
+
+.btn-like.active {
+    color: salmon;
+}
+.btn-favorite {
+    color: lightslategray;
+}
+.btn-favorite.active {
+    color: lightslategray;
+}
+
+.likecount {
+    background-color: white;
+    display: flex;
+    padding-left: 15px;
+    padding-top: 5px;
+    flex-direction: column;
+    align-self: center;
+    font-weight: bold;
+}
+
+.text {
+    padding-left: 15px;
+    padding-top: 5px;
+}
+
+.time {
+    background-color: white;
+    display: flex;
+    padding-left: 15px;
+    font-size: small;
+    color: lightslategray;
+    padding-top: 5px;
+}
+
+.time2 {
+    background-color: white;
+    width: 500px;
+    border: 1px solid #d2d2d2;
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     align-self: center;
     margin: auto;
-}
-
-
-.btn-like {
     list-style: none;
-    display: flex;
-    padding: 0;
-    color: black;
-    font-size: 28px;
 }
-

@@ -21,4 +21,3 @@ const night = document.querySelector('.night');
 day.classList.toggle('active');
 nightDayHandler(day, '#263343', 'white');
 nightDayHandler(night, 'white', '#263343');
-

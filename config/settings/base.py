@@ -65,6 +65,7 @@ DJANGO_APPS = [
     "django.forms",
     "widget_tweaks",
     "django.contrib.sites",
+    "imagekit",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
