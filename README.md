@@ -25,6 +25,9 @@
 ### 회원가입 화면
 ![회원가입](https://user-images.githubusercontent.com/68969252/91634792-13372e00-ea2e-11ea-807d-17ac059477e9.PNG)
 
+### 포스트 생성 화면
+![포스트생성](https://user-images.githubusercontent.com/68969252/92302490-877e4e00-efa7-11ea-9fe9-86769c48aecb.PNG)
+
 ### 포스트 리스트 화면
 ![포스트](https://user-images.githubusercontent.com/68969252/91852992-880f9f80-ec9c-11ea-9071-c924997f69f6.PNG)
 
